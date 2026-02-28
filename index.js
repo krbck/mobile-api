@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 80;
 
 // Static version field
 const VERSION = "1.0.0";
