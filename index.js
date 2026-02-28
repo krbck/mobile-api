@@ -3,7 +3,7 @@ const app = express();
 const port = 80;
 
 // Static version field
-const VERSION = "1.0.0";
+const VERSION = "2.0.0";
 
 app.get('/api/version', (req, res) => {
     res.json({ version: VERSION });
