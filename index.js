@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const port = 80;
 
-// Static version field
-const VERSION = "2.0.0";
+// Version from environment variable
+const VERSION = process.env.APP_VERSION || "1.0.0";
 
 app.get('/api/version', (req, res) => {
     res.json({ version: VERSION });
