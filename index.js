@@ -17,6 +17,6 @@ app.get('/api/checkversion', (req, res) => {
     res.json({ version: VERSION });
 });
 
-app.listen(port,'0.0.0.', () => {
+app.listen(port,'0.0.0.0', () => {
     console.log(`Server is running on http://0.0.0.0:${port}`);
 });
