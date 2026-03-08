@@ -9,10 +9,14 @@ app.get('/api/version', (req, res) => {
     res.json({ version: VERSION });
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
+
 app.get('/api/checkversion', (req, res) => {
     res.json({ version: VERSION });
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.listen(port,'0.0.0.', () => {
+    console.log(`Server is running on http://0.0.0.0:${port}`);
 });
