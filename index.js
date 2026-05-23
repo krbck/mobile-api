@@ -2,12 +2,20 @@ const express = require('express');
 const app = express();
 const port = 80;
 
+// Trust proxy headers (needed when running behind gateways/sidecars like Istio/Envoy)
+app.set('trust proxy', true);
+
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
+    if (req.path === '/health') {
+        return next();
+    }
     const start = Date.now();
     res.on('finish', () => {
         const duration = Date.now() - start;
-        console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl || req.url} ${res.statusCode} - ${duration}ms - IP: ${req.ip} - UA: ${req.headers['user-agent']}`);
+        const clientIp = req.headers['x-forwarded-for'] || req.ip;
+        const host = req.headers['host'] || '';
+        console.log(`[${new Date().toISOString()}] ${req.method} ${host}${req.originalUrl || req.url} ${res.statusCode} - ${duration}ms - IP: ${clientIp} - UA: ${req.headers['user-agent']}`);
     });
     next();
 });
