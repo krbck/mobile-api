@@ -5,7 +5,23 @@ on:
     branches: [ main ]
 
 jobs:
+  sast:
+    name: Semgrep SAST
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Semgrep
+        run: npx semgrep scan --config auto --error
+
   build:
+    needs: sast
     runs-on: ubuntu-latest
 
     permissions:
