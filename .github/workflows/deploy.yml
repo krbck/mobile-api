@@ -35,7 +35,7 @@ jobs:
           docker build -t $IMAGE .
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@ed142fd04655f41426d40539129712140409a632 # v0.36.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           image-ref: 'ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.tag }}'
           format: 'table'
